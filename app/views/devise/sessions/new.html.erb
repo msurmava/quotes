@@ -1,0 +1,22 @@
+<div style="margin: 0 auto; text-align:center">
+  <h2>Log in</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs" style="width: 100%; margin-top: 10px">
+      <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Log in", style:"background-color:hsl(10deg 73% 54%); margin-top: 10px; color:white"%>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

@@ -23,6 +23,18 @@ class LineItemDatesTest < ApplicationSystemTestCase
     assert_text I18n.l(Date.current + 1.day, format: :long)
   end
 
+  test "Creating an invalid line item date" do
+    assert_selector "h1", text: "First quote"
+
+    click_on "New date"
+    assert_selector "h1", text: "First quote"
+    fill_in "Date", with: ''
+
+    click_on "Create date"
+
+    assert_text "Date can't be blank"
+  end
+
   test "Updating a line item date" do
     assert_selector "h1", text: "First quote"
 
@@ -36,6 +48,21 @@ class LineItemDatesTest < ApplicationSystemTestCase
     click_on "Update date"
 
     assert_text I18n.l(Date.current + 1.day, format: :long)
+  end
+
+  test "Updating an invalid line item date" do
+    assert_selector "h1", text: "First quote"
+
+    within id: dom_id(@line_item_date, :edit) do
+      click_on "Edit"
+    end
+
+    assert_selector "h1", text: "First quote"
+
+    fill_in "Date", with: ''
+    click_on "Update date"
+
+    assert_text "Date can't be blank"
   end
 
   test "Destroying a line item date" do

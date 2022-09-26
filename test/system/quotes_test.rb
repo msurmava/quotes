@@ -26,6 +26,19 @@ class QuotesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Quotes"
     assert_text "Capybara quote"
   end
+  
+  test "Creating an invalid quote" do
+    visit quotes_path
+    assert_selector "h1", text: "Quotes"
+
+    click_on "New quote"
+    fill_in "Name", with: ""
+
+    assert_selector "h1", text: "Quotes"
+    click_on "Create quote"
+
+    assert_selector "div", text: "Name can't be blank"
+  end
 
   test "Updating a quote" do
     visit quotes_path
@@ -39,6 +52,20 @@ class QuotesTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Quotes"
     assert_text "Updated quote"
+  end
+
+  test "Updating an invalid quote" do
+    visit quotes_path
+    assert_selector "h1", text: "Quotes"
+
+    click_on "Edit", match: :first
+    fill_in "Name", with: ""
+
+    assert_selector "h1", text: "Quotes"
+    click_on "Update quote"
+
+    assert_selector "h1", text: "Quotes"
+    assert_selector "div", text: "Name can't be blank"
   end
 
   test "Destroying a quote" do

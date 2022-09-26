@@ -78,3 +78,5 @@ group :test do
 end
 
 gem "devise", "~> 4.8.1"
+
+gem 'simplecov', require: false, group: :test
